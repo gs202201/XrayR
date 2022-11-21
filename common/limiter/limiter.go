@@ -4,7 +4,6 @@ package limiter
 import (
 	"context"
 	"fmt"
-	"log"
 	"strings"
 	"sync"
 	"time"
@@ -48,7 +47,6 @@ func New() *Limiter {
 func (l *Limiter) AddInboundLimiter(tag string, nodeSpeedLimit uint64, userList *[]api.UserInfo, globalDeviceLimit *GlobalDeviceLimitConfig) error {
 	// global limit
 	if globalDeviceLimit.Limit > 0 {
-		log.Printf("[%s] GlobalDeviceLimit limit: %d", tag, globalDeviceLimit.Limit)
 		l.r = redis.NewClient(&redis.Options{
 			Addr:     globalDeviceLimit.RedisAddr,
 			Password: globalDeviceLimit.RedisPassword,
